@@ -1,6 +1,10 @@
 import os
 from dotenv import load_dotenv
+import logging
 
+logger = logging.getLogger(__name__)
+
+# .env ফাইল লোড করুন
 load_dotenv()
 
 # API Keys
@@ -8,7 +12,7 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 CLAUDE_API_KEY = os.getenv('CLAUDE_API_KEY')
 
 # Bot Settings
-BOT_NAME = os.getenv('BOT_NAME', 'Sonic Service')
+BOT_NAME = os.getenv('BOT_NAME', 'Sonic Service Bot')
 LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
 # Claude Model
@@ -39,7 +43,13 @@ PRODUCTS = {
 
 # Validation
 if not TELEGRAM_BOT_TOKEN:
-    raise ValueError('TELEGRAM_BOT_TOKEN পরিবেশ পরিবর্তনশীল প্রয়োজন')
+    error_msg = '❌ Error: TELEGRAM_BOT_TOKEN পরিবেশ পরিবর্তনশীল প্রয়োজন'
+    logger.error(error_msg)
+    raise ValueError(error_msg)
 
 if not CLAUDE_API_KEY:
-    raise ValueError('CLAUDE_API_KEY পরিবেশ পরিবর্তনশীল প্রয়োজন')
+    error_msg = '❌ Error: CLAUDE_API_KEY পরিবেশ পরিবর্তনশীল প্রয়োজন'
+    logger.error(error_msg)
+    raise ValueError(error_msg)
+
+logger.info("✅ Settings লোড হয়েছে সফলভাবে")
